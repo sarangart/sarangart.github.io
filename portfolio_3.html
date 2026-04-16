@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarra Ferdi | Social Media Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #151515;
+            --bg-card: #1a1a1a;
+            --accent-primary: #ff1744;
+            --accent-secondary: #ff0066;
+            --accent-tertiary: #00d4ff;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-tertiary: #606060;
+            --border: #2a2a2a;
+            --shadow: rgba(255, 23, 68, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 23, 68, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 102, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 212, 255, 0.02) 0%, transparent 50%);
+            animation: gradientShift 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-5%, 5%) rotate(120deg); }
+            66% { transform: translate(5%, -5%) rotate(240deg); }
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .hero-content {
+            width: 100%;
+        }
+
+        .hero-name {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 800;
+            line-height: 0.9;
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-name span {
+            display: block;
+        }
+
+        .name-first {
+            color: var(--text-primary);
+            text-transform: uppercase;
+        }
+
+        .name-last {
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { 
+                text-shadow: 
+                    0 0 20px var(--accent-primary),
+                    0 0 40px var(--accent-primary),
+                    0 0 60px var(--accent-primary);
+            }
+            50% { 
+                text-shadow: 
+                    0 0 10px var(--accent-primary),
+                    0 0 20px var(--accent-primary),
+                    0 0 30px var(--accent-primary);
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            background: transparent;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-primary);
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-primary);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            color: var(--bg-primary);
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .scroll-indicator span {
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .scroll-indicator::after {
+            content: '';
+            width: 1px;
+            height: 30px;
+            background: linear-gradient(to bottom, var(--accent-primary), transparent);
+        }
+
+        .section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text-tertiary);
+            margin-bottom: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .client-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        .client-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .client-card:hover::before {
+            left: 100%;
+        }
+
+        .client-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px var(--shadow);
+        }
+
+        .client-card:hover .client-logo {
+            color: var(--accent-primary);
+        }
+
+        .client-logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .client-handle {
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .client-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .client-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+            transition: gap 0.3s ease;
+        }
+
+        .client-card:hover .client-link {
+            gap: 1rem;
+        }
+
+        .client-link::after {
+            content: '→';
+            font-size: 1.2rem;
+        }
+
+        .stats-section {
+            background: var(--bg-secondary);
+            padding: 6rem 0;
+            margin: 8rem 0;
+            position: relative;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: var(--accent-primary);
+        }
+
+        .stat-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .skill-tag {
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        .platforms-section {
+            padding: 8rem 0;
+            background: var(--bg-secondary);
+        }
+
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .platform-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .platform-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .platform-item:hover::before {
+            opacity: 0.05;
+        }
+
+        .platform-item:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px var(--shadow);
+        }
+
+        .platform-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .platform-item:hover .platform-icon {
+            transform: scale(1.1);
+        }
+
+        .platform-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-section {
+            text-align: center;
+            padding: 8rem 0;
+        }
+
+        .contact-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 2px solid var(--text-secondary);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-primary);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent-primary);
+            color: var(--bg-primary);
+        }
+
+        .contact-link:hover::before {
+            left: 0;
+        }
+
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .clients-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .platforms-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--accent-primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.15s ease;
+            mix-blend-mode: difference;
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <header>
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1 class="hero-name">
+                    <span class="name-first">Sarra</span>
+                    <span class="name-last">Ferdi</span>
+                </h1>
+                <p class="hero-title">Social Media Manager / Digital Strategist</p>
+                <p class="hero-description">
+                    Crafting compelling digital narratives and building engaged communities across multiple brands. 
+                    Specializing in content strategy, brand identity, and social media growth.
+                </p>
+                <a href="#clients" class="cta-button">
+                    <span>Explore My Work</span>
+                </a>
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item fade-in">
+                    <div class="stat-number">7+</div>
+                    <div class="stat-label">Brands Managed</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number">100K+</div>
+                    <div class="stat-label">Total Reach</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Content Created</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Engagement Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="clients" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Brands I Manage</h2>
+            <p class="section-subtitle fade-in">Building digital presence across industries</p>
+            
+            <div class="clients-grid">
+                <a href="https://www.instagram.com/jow_radio/" target="_blank" class="client-card fade-in">
+                    <div class="client-logo">JOW Radio</div>
+                    <div class="client-handle">@jow_radio</div>
+                    <div class="client-description">
+                        Creating engaging audio content and building a vibrant community around music and culture.
+                    </div>
+                    <span class="client-link">View Instagram</span>
+                </a>
+
+                <a href="https://www.instagram.com/paypart.dz/" target="_blank" class="client-card fade-in">
+                    <div class="client-logo">PayPart</div>
+                    <div class="client-handle">@paypart.dz</div>
+                    <div class="client-description">
+                        Driving fintech engagement through strategic content and innovative social media campaigns.
+                    </div>
+                    <span class="client-link">View Instagram</span>
+                </a>
+
+                <a href="https://www.instagram.com/mediacom_algeria/" target="_blank" class="client-card fade-in">
+                    <div class="client-logo">Mediacom</div>
+                    <div class="client-handle">@mediacom_algeria</div>
+                    <div class="client-description">
+                        Amplifying media and advertising narratives with compelling visual storytelling.
+                    </div>
+                    <span class="client-link">View Instagram</span>
+                </a>
+
+                <a href="https://www.instagram.com/wedey_ai/" target="_blank" class="client-card fade-in">
+                    <div class="client-logo">Wedey AI</div>
+                    <div class="client-handle">@wedey_ai</div>
+                    <div class="client-description">
+                        Showcasing cutting-edge AI solutions through thought leadership and educational content.
+                    </div>
+                    <span class="client-link">View Instagram</span>
+                </a>
+
+                <a href="https://www.instagram.com/cabas_app/" target="_blank" class="client-card fade-in">
+                    <div class="client-logo">Cabas</div>
+                    <div class="client-handle">@cabas_app</div>
+                    <div class="client-description">
+                        Building brand awareness for innovative e-commerce solutions in Algeria.
+                    </div>
+                    <span class="client-link">View Instagram</span>
+                </a>
+
+                <a href="https://www.instagram.com/uxo_group/" target="_blank" class="client-card fade-in">
+                    <div class="client-logo">UXO Group</div>
+                    <div class="client-handle">@uxo_group</div>
+                    <div class="client-description">
+                        Elevating design and user experience narratives through strategic content.
+                    </div>
+                    <span class="client-link">View Instagram</span>
+                </a>
+
+                <a href="https://www.instagram.com/go.platform/" target="_blank" class="client-card fade-in">
+                    <div class="client-logo">GO Platform</div>
+                    <div class="client-handle">@go.platform</div>
+                    <div class="client-description">
+                        Creating dynamic content for innovative platform solutions and digital experiences.
+                    </div>
+                    <span class="client-link">View Instagram</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">About Me</h2>
+            <div class="about-content">
+                <p class="about-text fade-in">
+                    I'm a social media manager and digital strategist with a passion for crafting authentic brand stories 
+                    that resonate with audiences. With experience managing diverse brands across fintech, media, AI, and 
+                    e-commerce, I bring a unique perspective to every project.
+                </p>
+                <p class="about-text fade-in">
+                    My approach combines data-driven insights with creative storytelling to build engaged communities 
+                    and drive meaningful results. From content creation to community management, I handle every aspect 
+                    of social media strategy with precision and creativity.
+                </p>
+
+                <div class="skills-list fade-in">
+                    <span class="skill-tag">Social Media Strategy</span>
+                    <span class="skill-tag">Content Creation</span>
+                    <span class="skill-tag">Community Management</span>
+                    <span class="skill-tag">Brand Development</span>
+                    <span class="skill-tag">Analytics & Insights</span>
+                    <span class="skill-tag">Campaign Management</span>
+                    <span class="skill-tag">Copywriting</span>
+                    <span class="skill-tag">Visual Design</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="platforms-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Platforms I Manage</h2>
+            <p class="section-subtitle fade-in">Multi-platform expertise across all major social networks</p>
+            
+            <div class="platforms-grid">
+                <div class="platform-item fade-in">
+                    <div class="platform-icon">📘</div>
+                    <div class="platform-name">Facebook</div>
+                </div>
+
+                <div class="platform-item fade-in">
+                    <div class="platform-icon">📸</div>
+                    <div class="platform-name">Instagram</div>
+                </div>
+
+                <div class="platform-item fade-in">
+                    <div class="platform-icon">🎵</div>
+                    <div class="platform-name">TikTok</div>
+                </div>
+
+                <div class="platform-item fade-in">
+                    <div class="platform-icon">▶️</div>
+                    <div class="platform-name">YouTube</div>
+                </div>
+
+                <div class="platform-item fade-in">
+                    <div class="platform-icon">💼</div>
+                    <div class="platform-name">LinkedIn</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="contact-title fade-in">Let's Create Something Amazing</h2>
+            <p class="about-text fade-in" style="text-align: center; max-width: 600px; margin: 0 auto;">
+                Ready to elevate your brand's digital presence? Let's connect and discuss how we can work together.
+            </p>
+            <div class="contact-links fade-in">
+                <a href="https://www.linkedin.com/in/sarra-ferdi/" target="_blank" class="contact-link">LinkedIn</a>
+                <a href="mailto:sarra.ferdii@gmail.com" class="contact-link">Email Me</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">© 2026 Sarra Ferdi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        let mouseX = 0, mouseY = 0;
+        let outlineX = 0, outlineY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            cursorDot.style.left = `${mouseX}px`;
+            cursorDot.style.top = `${mouseY}px`;
+        });
+
+        function animateOutline() {
+            outlineX += (mouseX - outlineX) * 0.15;
+            outlineY += (mouseY - outlineY) * 0.15;
+
+            cursorOutline.style.left = `${outlineX - 20}px`;
+            cursorOutline.style.top = `${outlineY - 20}px`;
+
+            requestAnimationFrame(animateOutline);
+        }
+
+        animateOutline();
+
+        document.querySelectorAll('a, button, .client-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorDot.style.transform = 'scale(1.5)';
+                cursorOutline.style.transform = 'scale(1.5)';
+            });
+
+            el.addEventListener('mouseleave', () => {
+                cursorDot.style.transform = 'scale(1)';
+                cursorOutline.style.transform = 'scale(1)';
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
